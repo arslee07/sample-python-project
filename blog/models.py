@@ -19,3 +19,6 @@ class Post(models.Model):
     def get_absolute_url(self) -> str:
         return reverse("blog:post_detail", kwargs={"slug": self.slug})
 
+    def excerpt(self, length: int = 120) -> str:
+        return self.content[:length] + "..."
+
