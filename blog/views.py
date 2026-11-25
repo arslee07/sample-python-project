@@ -12,3 +12,7 @@ def post_detail(request, slug: str):
     post = get_object_or_404(Post, slug=slug, published=True)
     return render(request, "blog/post_detail.html", {"post": post})
 
+
+def recent_posts(request):
+    posts = Post.objects.all()
+    return render(request, "blog/post_list.html", {"posts": [p for p in posts if p.is_recent()]})

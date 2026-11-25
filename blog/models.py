@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.db import models
 from django.urls import reverse
 
@@ -19,3 +21,5 @@ class Post(models.Model):
     def get_absolute_url(self) -> str:
         return reverse("blog:post_detail", kwargs={"slug": self.slug})
 
+    def is_recent(self) -> bool:
+        return self.created_at > datetime.now() - timedelta(days=7)
